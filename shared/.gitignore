@@ -1,0 +1,9 @@
+.gradle
+.idea
+NewsApp.iml
+app/app.iml
+app/build
+build
+gradlew
+gradlew.bat
+local.properties
