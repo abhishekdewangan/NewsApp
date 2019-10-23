@@ -10,7 +10,7 @@ abstract class BasePresenterImpl<T: BaseView> : BasePresenter<T>, CoroutineScope
   private val job = Job()
   lateinit var view: T
 
-  override suspend fun onStart(view: T) {
+  override fun onStart(view: T) {
     this.view = view
     start()
   }
@@ -18,7 +18,7 @@ abstract class BasePresenterImpl<T: BaseView> : BasePresenter<T>, CoroutineScope
   override val coroutineContext: CoroutineContext
     get() = appCoroutineContext + job
 
-  open suspend fun start() {
+  open fun start() {
 
   }
   override fun onDestroy() {
