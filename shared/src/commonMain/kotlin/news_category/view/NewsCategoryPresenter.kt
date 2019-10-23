@@ -11,7 +11,7 @@ class NewsCategoryPresenter constructor(
 ) : NewsCategoryContract.Presenter {
 
     private lateinit var view: NewsCategoryContract.View
-    private val newsCategories = GetNewsCategories(newsCategoryRepo)()
+    private val newsCategories = GetNewsCategories(newsCategoryRepo).invoke()
 
     override fun setView(view: NewsCategoryContract.View) {
         this.view = view
