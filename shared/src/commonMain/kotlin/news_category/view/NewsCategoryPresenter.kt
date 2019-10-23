@@ -13,19 +13,20 @@ class NewsCategoryPresenter constructor(
     private lateinit var view: NewsCategoryContract.View
     private val newsCategories = GetNewsCategories(newsCategoryRepo).invoke()
 
-    override fun setView(view: NewsCategoryContract.View) {
-        this.view = view
-    }
 
-    // todo remaining work here
-    override fun start() {
+    override fun onStart(view: NewsCategoryContract.View) {
+        this.view = view
+        //todo remaining work
         GetSelectedNewsCategories(newsCategoryRepo).invoke()
             .map { newsCategoriesVMMapper.map(newsCategories, it) }
-
     }
 
     //todo remaining work
     override fun onCategorySelected(categoryName: String) {
+    }
+
+    override fun onDestroy() {
+
     }
 
 }
