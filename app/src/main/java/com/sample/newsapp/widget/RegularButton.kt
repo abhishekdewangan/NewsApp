@@ -12,6 +12,7 @@ class RegularButton constructor(context: Context, attrs: AttributeSet?, defStyle
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 
+    //todo add support for changing button text and image
     init {
         val rootView = inflate(context, R.layout.partial_regular_button, this)
         ButterKnife.bind(this, rootView)
