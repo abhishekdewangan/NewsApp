@@ -1,13 +1,10 @@
 package base
 
 import kotlinx.coroutines.CoroutineScope
-import kotlinx.coroutines.Job
-import paltfrom_expectations.appCoroutineContext
 import kotlin.coroutines.CoroutineContext
 
-abstract class BasePresenterImpl<T: BaseView> : BasePresenter<T>, CoroutineScope {
+abstract class BasePresenterImpl<T: BaseView>(override val coroutineContext: CoroutineContext) : BasePresenter<T>, CoroutineScope {
 
-  private val job = Job()
   lateinit var view: T
 
   override fun onStart(view: T) {
@@ -15,14 +12,12 @@ abstract class BasePresenterImpl<T: BaseView> : BasePresenter<T>, CoroutineScope
     start()
   }
 
-  override val coroutineContext: CoroutineContext
-    get() = appCoroutineContext + job
-
   open fun start() {
 
   }
+
   override fun onDestroy() {
-    job.cancel()
+
   }
 
 }

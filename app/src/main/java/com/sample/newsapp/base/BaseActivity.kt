@@ -10,8 +10,15 @@ import base.BaseView
 import butterknife.BindView
 import butterknife.ButterKnife
 import com.sample.newsapp.R
+import kotlinx.coroutines.CoroutineScope
+import kotlinx.coroutines.Job
+import paltfrom_expectations.appCoroutineContext
+import kotlin.coroutines.CoroutineContext
 
-abstract class BaseActivity : AppCompatActivity(), BaseView {
+abstract class BaseActivity : AppCompatActivity(), BaseView, CoroutineScope {
+  private val job = Job()
+  override val coroutineContext: CoroutineContext = appCoroutineContext + job
+
   @BindView(R.id.view_loader)
   lateinit var loaderView: ProgressBar
 
@@ -39,6 +46,11 @@ abstract class BaseActivity : AppCompatActivity(), BaseView {
 
   override fun hideLoader() {
     loaderView.visibility = View.GONE
+  }
+
+  override fun onDestroy() {
+    super.onDestroy()
+    job.cancel()
   }
 
   abstract fun getLayoutId(): Int

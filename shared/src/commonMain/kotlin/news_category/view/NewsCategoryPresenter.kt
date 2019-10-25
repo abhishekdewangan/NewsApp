@@ -5,11 +5,13 @@ import kotlinx.coroutines.channels.consumeEach
 import kotlinx.coroutines.channels.map
 import kotlinx.coroutines.launch
 import news_category.domain.*
+import kotlin.coroutines.CoroutineContext
 
 class NewsCategoryPresenter constructor(
+    context: CoroutineContext,
     private val newsCategoryRepo: NewsCategoryRepo,
     private val newsCategoriesVMMapper: NewsCategoriesVMMapper = NewsCategoriesVMMapper()
-) : BasePresenterImpl<NewsCategoryContract.View>(), NewsCategoryContract.Presenter {
+) : BasePresenterImpl<NewsCategoryContract.View>(context), NewsCategoryContract.Presenter {
 
     private val newsCategories = GetNewsCategories(newsCategoryRepo).invoke()
 
