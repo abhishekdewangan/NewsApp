@@ -18,9 +18,7 @@ class NewsCategoryRepoImpl(
     private val selectedCategoryChannel = Channel<List<NewsCategory>>()
 
     init {
-        launch {
-            initialRepoSetup()
-        }
+        initialRepoSetup()
     }
 
     override fun getAll(): List<NewsCategory> {
@@ -45,7 +43,7 @@ class NewsCategoryRepoImpl(
         updateSelectedCategory()
     }
 
-    private suspend fun initialRepoSetup() {
+    private fun initialRepoSetup() = launch {
         val selectedNewsCategoryKeys = settings
             .getString(SharedPrefConstants.KEY_SELECTED_CATEGORY)
             .split(",")
