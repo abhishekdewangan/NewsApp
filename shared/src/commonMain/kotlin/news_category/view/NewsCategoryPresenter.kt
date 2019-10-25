@@ -14,16 +14,18 @@ class NewsCategoryPresenter constructor(
     private val newsCategories = GetNewsCategories(newsCategoryRepo).invoke()
 
     override fun start() {
-        inititalRender()
+        initialRender()
         launch { susbscribeToSelectedCategory() }
     }
 
     //todo remaining work
     override fun onCategorySelected(categoryName: String) {
-
+        launch {
+            SelectCategory(newsCategoryRepo).invoke(categoryName)
+        }
     }
 
-    private fun inititalRender() {
+    private fun initialRender() {
         newsCategoriesVMMapper.map(newsCategories, emptyList())
             .apply { view.render(this) }
     }

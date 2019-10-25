@@ -13,7 +13,11 @@ class NewsCategoryRepoImpl : NewsCategoryRepo {
         return NewsCategory.values().toList()
     }
 
-    override fun getSelectedCategories(): ReceiveChannel<List<NewsCategory>> {
+    override fun getSelectedCategories(): List<NewsCategory> {
+        return selectedCategoriesSet.toList()
+    }
+
+    override fun getSelectedCategoriesChannel(): ReceiveChannel<List<NewsCategory>> {
        return selectedCategoryChannel
     }
 
