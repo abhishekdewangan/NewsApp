@@ -1,6 +1,6 @@
 package news_category.domain
 
-enum class NewsCategory(name: String, keyWord: String){
+enum class NewsCategory(val categoryName: String, val key: String){
     Business("business", "business"),
     Entertainment("Entertainment", "entertainment"),
     General("General", "general"),

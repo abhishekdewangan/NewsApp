@@ -13,6 +13,6 @@ class NewsCategoriesVMMapper constructor(private val newsCategoryVMMapper: NewsC
 class NewsCategoryVMMapper {
     fun map(newsCategory: NewsCategory, selectedCategories: List<NewsCategory>): NewsCategoryVM {
         val isSelected = selectedCategories.any { it == newsCategory }
-        return NewsCategoryVM(name = newsCategory.name, isSelected = isSelected)
+        return NewsCategoryVM(name = newsCategory.categoryName, isSelected = isSelected)
     }
 }
