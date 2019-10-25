@@ -18,6 +18,7 @@ kotlin {
             implementation "io.ktor:ktor-client-core:$ktor_version"
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
             implementation "com.russhwolf:multiplatform-settings:$multiplatform_seting_version"
+            implementation "org.kodein.di:kodein-di-generic-jvm:$kodein_version"
         }
 
         androidMain.dependencies {
