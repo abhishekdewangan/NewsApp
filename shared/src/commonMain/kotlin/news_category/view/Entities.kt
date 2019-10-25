@@ -1,5 +1,5 @@
 package news_category.view
 
-class NewsCategoriesVM(private val categoriesVM: List<NewsCategoryVM>)
+class NewsCategoriesVM(val categoriesVM: List<NewsCategoryVM>)
 
-class NewsCategoryVM(private val name: String, private val isSelected: Boolean)
+class NewsCategoryVM(val name: String, val isSelected: Boolean)

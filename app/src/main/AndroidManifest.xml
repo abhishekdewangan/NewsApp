@@ -5,9 +5,11 @@
     <application
         android:allowBackup="true"
         android:label="@string/app_name"
+        android:icon="@mipmap/ic_launcher"
+        android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".news_category.NewsCategoryActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
