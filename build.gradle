@@ -18,7 +18,17 @@ buildscript {
         classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$kotlin_version"
         classpath "org.jetbrains.kotlin:kotlin-native-gradle-plugin:$kotlin_native_version"
         classpath "org.jetbrains.kotlin:kotlin-serialization:$kotlin_version"
+        classpath "org.jetbrains.kotlin:kotlin-android-extensions:$kotlin_version"
     }
+}
+
+ext {
+    kotlin_version = '1.3.21'
+    kotlin_native_version = '1.3.21'
+    ktor_version = '1.1.1'
+    kotlinx_coroutines_version = '1.1.1'
+    multiplatform_seting_version = '0.4'
+    kodein_version =  '6.4.1'
 }
 
 allprojects {
