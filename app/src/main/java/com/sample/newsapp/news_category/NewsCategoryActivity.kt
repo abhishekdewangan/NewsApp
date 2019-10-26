@@ -46,11 +46,13 @@ class NewsCategoryActivity : BaseActivity(), NewsCategoryContract.View, KodeinAw
 
     private fun setupRecyclerView() {
         newsCategoryRecycler.layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-        adapter = NewsCategoryRecyclerAdapter(object : OnItemClickListener<NewsCategoryVM> {
-            override fun onItemClicked(item: NewsCategoryVM) {
-                presenter.onCategorySelected(item.name)
-            }
-        })
+        adapter = NewsCategoryRecyclerAdapter(ItemClickListener())
         newsCategoryRecycler.adapter = adapter
+    }
+
+    inner class ItemClickListener: OnItemClickListener<NewsCategoryVM> {
+        override fun onItemClicked(item: NewsCategoryVM) {
+            presenter.onCategorySelected(item.name)
+        }
     }
 }
