@@ -1,39 +1,35 @@
 package com.sample.newsapp.news_category
 
-import android.content.Context
 import android.widget.GridLayout.VERTICAL
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import butterknife.BindView
-import com.russhwolf.settings.AndroidSettings
+import com.sample.newsapp.application.NewsApplication
 import com.sample.newsapp.R
 import com.sample.newsapp.base.BaseActivity
 import com.sample.newsapp.base.OnItemClickListener
 import com.sample.newsapp.widget.RegularButton
-import constants.SharedPrefConstants.Companion.PREFERENCE_NAME
-import news_category.data.NewsCategoryRepoImpl
 import news_category.view.NewsCategoriesVM
 import news_category.view.NewsCategoryContract
-import news_category.view.NewsCategoryPresenter
 import news_category.view.NewsCategoryVM
+import org.kodein.di.Kodein
+import org.kodein.di.KodeinAware
+import org.kodein.di.generic.instance
 
-class NewsCategoryActivity : BaseActivity(), NewsCategoryContract.View {
+class NewsCategoryActivity : BaseActivity(), NewsCategoryContract.View, KodeinAware {
+    override val kodein =  Kodein.lazy {
+        extend((application as NewsApplication).kodein)
+        import(NewsCategoryModule(coroutineContext).newsCategoryModule)
+    }
 
     @BindView(R.id.recycler_news_category)
     lateinit var newsCategoryRecycler: RecyclerView
     @BindView(R.id.btn_continue)
     lateinit var continueButton: RegularButton
 
-    private lateinit var presenter: NewsCategoryContract.Presenter
-    private lateinit var adapter: NewsCategoryRecyclerAdapter
+    private val presenter: NewsCategoryContract.Presenter by instance()
 
-    private fun setupPresenter() {
-        // todo sharedPref, presenter and repo should be injected
-        val sharedPreferences = applicationContext
-            .getSharedPreferences(PREFERENCE_NAME, Context.MODE_PRIVATE)
-        val repo = NewsCategoryRepoImpl(AndroidSettings(sharedPreferences), coroutineContext)
-        presenter = NewsCategoryPresenter(coroutineContext, repo)
-    }
+    private lateinit var adapter: NewsCategoryRecyclerAdapter
 
     override fun getLayoutId(): Int {
         return R.layout.activity_news_category
@@ -41,7 +37,6 @@ class NewsCategoryActivity : BaseActivity(), NewsCategoryContract.View {
 
     override fun onCreateFinished() {
         setupRecyclerView()
-        setupPresenter()
         presenter.onStart(this)
     }
 
@@ -51,11 +46,13 @@ class NewsCategoryActivity : BaseActivity(), NewsCategoryContract.View {
 
     private fun setupRecyclerView() {
         newsCategoryRecycler.layoutManager = StaggeredGridLayoutManager(2, VERTICAL)
-        adapter = NewsCategoryRecyclerAdapter(object : OnItemClickListener<NewsCategoryVM> {
-            override fun onItemClicked(item: NewsCategoryVM) {
-                presenter.onCategorySelected(item.name)
-            }
-        })
+        adapter = NewsCategoryRecyclerAdapter(ItemClickListener())
         newsCategoryRecycler.adapter = adapter
+    }
+
+    inner class ItemClickListener: OnItemClickListener<NewsCategoryVM> {
+        override fun onItemClicked(item: NewsCategoryVM) {
+            presenter.onCategorySelected(item.name)
+        }
     }
 }

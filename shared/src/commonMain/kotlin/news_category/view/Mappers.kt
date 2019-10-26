@@ -2,7 +2,7 @@ package news_category.view
 
 import news_category.domain.NewsCategory
 
-class NewsCategoriesVMMapper constructor(private val newsCategoryVMMapper: NewsCategoryVMMapper = NewsCategoryVMMapper()) {
+class NewsCategoriesVMMapper constructor(private val newsCategoryVMMapper: NewsCategoryVMMapper) {
 
   fun map(newsCategories: List<NewsCategory>, selectedCategories: List<NewsCategory>): NewsCategoriesVM {
         val newsCategoriesVM = newsCategories.map { newsCategoryVMMapper.map(it, selectedCategories) }

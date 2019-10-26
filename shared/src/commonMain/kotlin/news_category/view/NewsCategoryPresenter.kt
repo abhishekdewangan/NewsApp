@@ -10,7 +10,7 @@ import kotlin.coroutines.CoroutineContext
 class NewsCategoryPresenter constructor(
     context: CoroutineContext,
     private val newsCategoryRepo: NewsCategoryRepo,
-    private val newsCategoriesVMMapper: NewsCategoriesVMMapper = NewsCategoriesVMMapper()
+    private val newsCategoriesVMMapper: NewsCategoriesVMMapper
 ) : BasePresenterImpl<NewsCategoryContract.View>(context), NewsCategoryContract.Presenter {
 
     private val newsCategories = GetNewsCategories(newsCategoryRepo).invoke()

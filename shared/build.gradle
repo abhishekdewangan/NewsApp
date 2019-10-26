@@ -18,6 +18,9 @@ kotlin {
             implementation "io.ktor:ktor-client-core:$ktor_version"
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-core-common:$coroutines_version"
             implementation "com.russhwolf:multiplatform-settings:$multiplatform_seting_version"
+
+            implementation "org.kodein.di:kodein-di-core:$kodein_version"
+            implementation "org.kodein.di:kodein-di-erased:$kodein_version"
         }
 
         androidMain.dependencies {
@@ -25,5 +28,14 @@ kotlin {
             implementation "io.ktor:ktor-client-android:$ktor_version"
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
         }
+    }
+}
+
+tasks.withType(org.jetbrains.kotlin.gradle.tasks.KotlinCompile).all {
+    sourceCompatibility = JavaVersion.VERSION_1_8
+    targetCompatibility = JavaVersion.VERSION_1_8
+
+    kotlinOptions {
+        jvmTarget = '1.8'
     }
 }

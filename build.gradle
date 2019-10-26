@@ -28,6 +28,7 @@ ext {
     ktor_version = '1.1.1'
     kotlinx_coroutines_version = '1.1.1'
     multiplatform_seting_version = '0.4'
+    kodein_version =  '6.4.1'
 }
 
 allprojects {
