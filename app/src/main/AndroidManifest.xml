@@ -8,6 +8,7 @@
         android:icon="@mipmap/ic_launcher"
         android:roundIcon="@mipmap/ic_launcher"
         android:supportsRtl="true"
+        android:name=".application.NewsApplication"
         android:theme="@style/AppTheme">
         <activity android:name=".news_category.NewsCategoryActivity">
             <intent-filter>
