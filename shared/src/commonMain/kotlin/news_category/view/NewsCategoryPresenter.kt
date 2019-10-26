@@ -17,10 +17,9 @@ class NewsCategoryPresenter constructor(
 
     override fun start() {
         initialRender()
-        launch { susbscribeToSelectedCategory() }
+        launch { subscribeToSelectedCategory() }
     }
 
-    //todo remaining work
     override fun onCategorySelected(categoryName: String) {
         launch {
             SelectCategory(newsCategoryRepo).invoke(categoryName)
@@ -32,7 +31,7 @@ class NewsCategoryPresenter constructor(
             .apply { view.render(this) }
     }
 
-    private suspend fun susbscribeToSelectedCategory() {
+    private suspend fun subscribeToSelectedCategory() {
         GetSelectedNewsCategories(newsCategoryRepo).invoke()
             .map { newsCategoriesVMMapper.map(newsCategories, it) }
             .consumeEach {
