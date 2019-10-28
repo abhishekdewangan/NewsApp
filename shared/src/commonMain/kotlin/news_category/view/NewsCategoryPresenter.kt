@@ -34,11 +34,7 @@ class NewsCategoryPresenter constructor(
     private suspend fun subscribeToSelectedCategory() {
         GetSelectedNewsCategories(newsCategoryRepo).invoke()
             .map { newsCategoriesVMMapper.map(newsCategories, it) }
-            .consumeEach {
-                println("NewsCategoryPresenter :: $it")
-                view.render(it)
-            }
-
+            .consumeEach { view.render(it) }
     }
 
 }
