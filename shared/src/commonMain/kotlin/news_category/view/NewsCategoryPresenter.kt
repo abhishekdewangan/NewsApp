@@ -9,11 +9,12 @@ import kotlin.coroutines.CoroutineContext
 
 class NewsCategoryPresenter constructor(
     context: CoroutineContext,
-    private val newsCategoryRepo: NewsCategoryRepo,
-    private val newsCategoriesVMMapper: NewsCategoriesVMMapper
+    private val newsCategoriesVMMapper: NewsCategoriesVMMapper,
+    private val getNewsCategories: GetNewsCategories,
+    private val selectCategory: SelectCategory,
+    private val selectedNewsCategories: GetSelectedNewsCategories
 ) : BasePresenterImpl<NewsCategoryContract.View>(context), NewsCategoryContract.Presenter {
 
-    private val newsCategories = GetNewsCategories(newsCategoryRepo).invoke()
 
     override fun start() {
         initialRender()
@@ -22,18 +23,18 @@ class NewsCategoryPresenter constructor(
 
     override fun onCategorySelected(categoryName: String) {
         launch {
-            SelectCategory(newsCategoryRepo).invoke(categoryName)
+           selectCategory(categoryName)
         }
     }
 
     private fun initialRender() {
-        newsCategoriesVMMapper.map(newsCategories, emptyList())
+        newsCategoriesVMMapper.map(getNewsCategories(), emptyList())
             .apply { view.render(this) }
     }
 
     private suspend fun subscribeToSelectedCategory() {
-        GetSelectedNewsCategories(newsCategoryRepo).invoke()
-            .map { newsCategoriesVMMapper.map(newsCategories, it) }
+        selectedNewsCategories()
+            .map { newsCategoriesVMMapper.map(getNewsCategories(), it) }
             .consumeEach { view.render(it) }
     }
 
