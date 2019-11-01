@@ -1,5 +1,7 @@
 apply plugin: 'com.android.library'
 apply plugin: 'kotlin-multiplatform'
+apply plugin: 'kotlinx-serialization'
+
 android {
     compileSdkVersion 28
     defaultConfig {
@@ -25,6 +27,8 @@ kotlin {
             implementation "io.ktor:ktor-client-core:$ktor_version"
             implementation "io.ktor:ktor-client-json:$ktor_version"
             implementation "io.ktor:ktor-client-logging:$ktor_version"
+
+            implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime-common:$serialization_version"
         }
 
         androidMain.dependencies {
@@ -36,6 +40,7 @@ kotlin {
             implementation "io.ktor:ktor-client-json-jvm:$ktor_version"
             implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
 
+            implementation "org.jetbrains.kotlinx:kotlinx-serialization-runtime:$serialization_version"
         }
     }
 }
