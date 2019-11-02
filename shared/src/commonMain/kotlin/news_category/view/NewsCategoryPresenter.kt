@@ -1,8 +1,8 @@
 package news_category.view
 
 import base.BasePresenterImpl
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.channels.map
 import kotlinx.coroutines.launch
 import news_category.domain.*
 import kotlin.coroutines.CoroutineContext
@@ -31,10 +31,13 @@ class NewsCategoryPresenter constructor(
             .apply { view.render(this) }
     }
 
+    @UseExperimental(ExperimentalCoroutinesApi::class)
     private suspend fun subscribeToSelectedCategory() {
         GetSelectedNewsCategories(newsCategoryRepo).invoke()
-            .map { newsCategoriesVMMapper.map(newsCategories, it) }
-            .consumeEach { view.render(it) }
+            .consumeEach {
+                val result =  newsCategoriesVMMapper.map(newsCategories, it)
+                view.render(result)
+            }
     }
 
 }
