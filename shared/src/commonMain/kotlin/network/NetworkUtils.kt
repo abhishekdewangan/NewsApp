@@ -13,6 +13,9 @@ import io.ktor.client.features.logging.Logging
 
 class NetworkUtils(httpClientEngineFactory: HttpClientEngineFactory<HttpClientEngineConfig>)  {
     val httpClient: HttpClient = HttpClient(httpClientEngineFactory) {
+        engine {
+            pipelining = true
+        }
         install(Logging) {
             logger = Logger.DEFAULT
             level = LogLevel.HEADERS
