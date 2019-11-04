@@ -38,7 +38,7 @@ kotlin {
 
             implementation "org.jetbrains.kotlinx:kotlinx-coroutines-android:$kotlinx_coroutines_version"
 
-            implementation "io.ktor:ktor-client-android:$ktor_version"
+            implementation "org.slf4j:slf4j-simple:$slf_logger_version"
             implementation "io.ktor:ktor-client-json-jvm:$ktor_version"
             implementation "io.ktor:ktor-client-logging-jvm:$ktor_version"
             implementation "io.ktor:ktor-client-serialization-jvm:$ktor_client_serialization"
