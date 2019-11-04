@@ -9,35 +9,35 @@ import kotlin.coroutines.CoroutineContext
 
 class NewsCategoryPresenter constructor(
     context: CoroutineContext,
-    private val newsCategoryRepo: NewsCategoryRepo,
-    private val newsCategoriesVMMapper: NewsCategoriesVMMapper
+    private val newsCategoriesVMMapper: NewsCategoriesVMMapper,
+    private val getNewsCategories: GetNewsCategories,
+    private val selectCategory: SelectCategory,
+    private val selectedNewsCategories: GetSelectedNewsCategories
 ) : BasePresenterImpl<NewsCategoryContract.View>(context), NewsCategoryContract.Presenter {
 
-    private val newsCategories = GetNewsCategories(newsCategoryRepo).invoke()
 
-    override fun start() {
-        initialRender()
-        launch { subscribeToSelectedCategory() }
-    }
+  override fun start() {
+    initialRender()
+    launch { subscribeToSelectedCategory() }
+  }
 
-    override fun onCategorySelected(categoryName: String) {
-        launch {
-            SelectCategory(newsCategoryRepo).invoke(categoryName)
-        }
+  override fun onCategorySelected(categoryName: String) {
+    launch {
+      selectCategory(categoryName)
     }
+  }
 
-    private fun initialRender() {
-        newsCategoriesVMMapper.map(newsCategories, emptyList())
-            .apply { view.render(this) }
-    }
+  private fun initialRender() {
+    newsCategoriesVMMapper.map(getNewsCategories(), emptyList())
+        .apply { view.render(this) }
+  }
 
-    @UseExperimental(ExperimentalCoroutinesApi::class)
-    private suspend fun subscribeToSelectedCategory() {
-        GetSelectedNewsCategories(newsCategoryRepo).invoke()
-            .consumeEach {
-                val result =  newsCategoriesVMMapper.map(newsCategories, it)
-                view.render(result)
-            }
+  @UseExperimental(ExperimentalCoroutinesApi::class)
+  private suspend fun subscribeToSelectedCategory() {
+    selectedNewsCategories().consumeEach {
+      val result = newsCategoriesVMMapper.map(getNewsCategories(), it)
+      view.render(result)
     }
+  }
 
 }
