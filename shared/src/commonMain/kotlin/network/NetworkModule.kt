@@ -7,9 +7,9 @@ import org.kodein.di.erased.instance
 import org.kodein.di.erased.singleton
 
 class NetworkModule {
-    companion object {
-        val networkModule = Kodein.Module("NetworkModule") {
-            bind<HttpClient>() with singleton { NetworkUtils(instance()).httpClient }
-        }
+  companion object {
+    val networkModule = Kodein.Module("NetworkModule") {
+      bind<HttpClient>() with singleton { NetworkUtils(instance()).httpClient }
     }
+  }
 }
