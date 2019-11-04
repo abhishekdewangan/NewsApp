@@ -1,8 +1,8 @@
 package news_category.view
 
 import base.BasePresenterImpl
+import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.channels.consumeEach
-import kotlinx.coroutines.channels.map
 import kotlinx.coroutines.launch
 import news_category.domain.*
 import kotlin.coroutines.CoroutineContext
@@ -16,26 +16,28 @@ class NewsCategoryPresenter constructor(
 ) : BasePresenterImpl<NewsCategoryContract.View>(context), NewsCategoryContract.Presenter {
 
 
-    override fun start() {
-        initialRender()
-        launch { subscribeToSelectedCategory() }
-    }
+  override fun start() {
+    initialRender()
+    launch { subscribeToSelectedCategory() }
+  }
 
-    override fun onCategorySelected(categoryName: String) {
-        launch {
-           selectCategory(categoryName)
-        }
+  override fun onCategorySelected(categoryName: String) {
+    launch {
+      selectCategory(categoryName)
     }
+  }
 
-    private fun initialRender() {
-        newsCategoriesVMMapper.map(getNewsCategories(), emptyList())
-            .apply { view.render(this) }
-    }
+  private fun initialRender() {
+    newsCategoriesVMMapper.map(getNewsCategories(), emptyList())
+        .apply { view.render(this) }
+  }
 
-    private suspend fun subscribeToSelectedCategory() {
-        selectedNewsCategories()
-            .map { newsCategoriesVMMapper.map(getNewsCategories(), it) }
-            .consumeEach { view.render(it) }
+  @UseExperimental(ExperimentalCoroutinesApi::class)
+  private suspend fun subscribeToSelectedCategory() {
+    selectedNewsCategories().consumeEach {
+      val result = newsCategoriesVMMapper.map(getNewsCategories(), it)
+      view.render(result)
     }
+  }
 
 }

@@ -12,7 +12,7 @@ import butterknife.ButterKnife
 import com.sample.newsapp.R
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Job
-import paltfrom_expectations.appCoroutineContext
+import platform_expectations.appCoroutineContext
 import kotlin.coroutines.CoroutineContext
 
 abstract class BaseActivity : AppCompatActivity(), BaseView, CoroutineScope {
