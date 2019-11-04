@@ -10,6 +10,7 @@ import io.ktor.client.features.logging.LogLevel
 import io.ktor.client.features.logging.Logger
 import io.ktor.client.features.logging.Logging
 import io.ktor.http.URLProtocol
+import kotlinx.serialization.json.Json
 
 
 class NetworkUtils(httpClientEngine: HttpClientEngine)  {
@@ -20,7 +21,7 @@ class NetworkUtils(httpClientEngine: HttpClientEngine)  {
         }
 
         install(JsonFeature) {
-            serializer = KotlinxSerializer()
+            serializer = KotlinxSerializer(Json.nonstrict)
         }
 
         defaultRequest {
