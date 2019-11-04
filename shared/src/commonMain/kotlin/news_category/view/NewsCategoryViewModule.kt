@@ -11,7 +11,7 @@ class NewsCategoryViewModule {
         val viewModule = Kodein.Module("NewsCategoryViewModule") {
             bind<NewsCategoryVMMapper>() with provider { NewsCategoryVMMapper() }
             bind<NewsCategoriesVMMapper>() with provider { NewsCategoriesVMMapper(instance()) }
-            bind<NewsCategoryContract.Presenter>() with provider { NewsCategoryPresenter(instance(SCOPE_ACTIVITY), instance(), instance()) }
+            bind<NewsCategoryContract.Presenter>() with provider { NewsCategoryPresenter(instance(SCOPE_ACTIVITY), instance(), instance(), instance(), instance()) }
         }
     }
 }
