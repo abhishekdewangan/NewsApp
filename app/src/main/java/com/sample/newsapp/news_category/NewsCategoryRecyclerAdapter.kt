@@ -23,7 +23,7 @@ class NewsCategoryRecyclerAdapter(private val itemClickListener: OnItemClickList
 
   override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): NewsCategoryItemViewHolder {
     val view = LayoutInflater.from(parent.context).inflate(R.layout.partial_news_category_item, parent, false)
-    return NewsCategoryItemViewHolder(view, itemClickListener = itemClickListener, adapter = this )
+    return NewsCategoryItemViewHolder(view, itemClickListener = itemClickListener, adapter = this)
   }
 
   override fun getItemCount(): Int {

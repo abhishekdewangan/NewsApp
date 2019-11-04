@@ -8,9 +8,9 @@ import org.kodein.di.erased.instance
 import org.kodein.di.erased.singleton
 
 class NewsCategoryDataModule {
-    companion object {
-        val dataModule = Kodein.Module("NewsCategoryDataModule") {
-            bind<NewsCategoryRepo>() with singleton { NewsCategoryRepoImpl(instance(), instance(SCOPE_APPLICATION)) }
-        }
+  companion object {
+    val dataModule = Kodein.Module("NewsCategoryDataModule") {
+      bind<NewsCategoryRepo>() with singleton { NewsCategoryRepoImpl(instance(), instance(SCOPE_APPLICATION)) }
     }
+  }
 }

@@ -7,7 +7,7 @@ import org.kodein.di.generic.provider
 import kotlin.coroutines.CoroutineContext
 
 class NewsCategoryPlatformModule(private val coroutineContext: CoroutineContext) {
-    val platformModule = Kodein.Module("NewsCategoryPlatformModule") {
-        bind<CoroutineContext>(tag = DependencyInjectionConstants.SCOPE_ACTIVITY) with provider { coroutineContext }
-    }
+  val platformModule = Kodein.Module("NewsCategoryPlatformModule") {
+    bind<CoroutineContext>(tag = DependencyInjectionConstants.SCOPE_ACTIVITY) with provider { coroutineContext }
+  }
 }

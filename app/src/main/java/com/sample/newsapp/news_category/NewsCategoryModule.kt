@@ -7,9 +7,9 @@ import kotlin.coroutines.CoroutineContext
 
 class NewsCategoryModule(private val coroutineContext: CoroutineContext) {
 
-    val newsCategoryModule = Kodein.Module("NewsCategoryModule") {
-        import(NewsCategoryPlatformModule(coroutineContext).platformModule)
-        import(NewsCategoryViewModule.viewModule)
-        import(NewsCategoryDomainModule.domainModule)
-    }
+  val newsCategoryModule = Kodein.Module("NewsCategoryModule") {
+    import(NewsCategoryPlatformModule(coroutineContext).platformModule)
+    import(NewsCategoryViewModule.viewModule)
+    import(NewsCategoryDomainModule.domainModule)
+  }
 }

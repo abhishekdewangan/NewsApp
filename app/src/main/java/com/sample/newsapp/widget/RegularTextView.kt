@@ -6,9 +6,9 @@ import android.util.AttributeSet
 import androidx.appcompat.widget.AppCompatTextView
 
 open class RegularTextView constructor(context: Context, attrs: AttributeSet?, defStyleAttr: Int = 0) :
-  AppCompatTextView(context, attrs, defStyleAttr) {
+    AppCompatTextView(context, attrs, defStyleAttr) {
 
-  constructor(context: Context): this(context, null)
+  constructor(context: Context) : this(context, null)
 
   constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
 

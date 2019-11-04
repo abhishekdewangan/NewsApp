@@ -7,11 +7,11 @@ import org.kodein.di.erased.instance
 import org.kodein.di.erased.provider
 
 class NewsCategoryViewModule {
-    companion object {
-        val viewModule = Kodein.Module("NewsCategoryViewModule") {
-            bind<NewsCategoryVMMapper>() with provider { NewsCategoryVMMapper() }
-            bind<NewsCategoriesVMMapper>() with provider { NewsCategoriesVMMapper(instance()) }
-            bind<NewsCategoryContract.Presenter>() with provider { NewsCategoryPresenter(instance(SCOPE_ACTIVITY), instance(), instance(), instance(), instance()) }
-        }
+  companion object {
+    val viewModule = Kodein.Module("NewsCategoryViewModule") {
+      bind<NewsCategoryVMMapper>() with provider { NewsCategoryVMMapper() }
+      bind<NewsCategoriesVMMapper>() with provider { NewsCategoriesVMMapper(instance()) }
+      bind<NewsCategoryContract.Presenter>() with provider { NewsCategoryPresenter(instance(SCOPE_ACTIVITY), instance(), instance(), instance(), instance()) }
     }
+  }
 }

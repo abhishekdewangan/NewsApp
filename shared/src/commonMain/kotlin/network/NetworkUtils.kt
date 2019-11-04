@@ -12,24 +12,23 @@ import io.ktor.client.features.logging.Logging
 import io.ktor.http.URLProtocol
 import kotlinx.serialization.json.Json
 
-
-class NetworkUtils(httpClientEngine: HttpClientEngine)  {
-    val httpClient: HttpClient = HttpClient(httpClientEngine) {
-        install(Logging) {
-            logger = Logger.DEFAULT
-            level = LogLevel.HEADERS
-        }
-
-        install(JsonFeature) {
-            serializer = KotlinxSerializer(Json.nonstrict)
-        }
-
-        defaultRequest {
-            url {
-                protocol = URLProtocol.HTTPS
-                host = "newsapi.org"
-                parameters.append("apiKey", "3cf3a461818d4c628833f46e9e11ef45")
-            }
-        }
+class NetworkUtils(httpClientEngine: HttpClientEngine) {
+  val httpClient: HttpClient = HttpClient(httpClientEngine) {
+    install(Logging) {
+      logger = Logger.DEFAULT
+      level = LogLevel.HEADERS
     }
+
+    install(JsonFeature) {
+      serializer = KotlinxSerializer(Json.nonstrict)
+    }
+
+    defaultRequest {
+      url {
+        protocol = URLProtocol.HTTPS
+        host = "newsapi.org"
+        parameters.append("apiKey", "3cf3a461818d4c628833f46e9e11ef45")
+      }
+    }
+  }
 }

@@ -1,31 +1,31 @@
 <?xml version="1.0" encoding="utf-8"?>
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    android:orientation="vertical"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_round_corner">
+    android:background="@drawable/bg_round_corner"
+    android:orientation="vertical">
 
-    <com.sample.newsapp.widget.RegularTextView
-        android:id="@+id/tv_button_text"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        android:textSize="@dimen/text_large"
-        android:textColor="@color/colorDarkBackground"
-        android:layout_marginEnd="@dimen/margin_low"
-        android:text="@string/text_continue"/>
+  <androidx.appcompat.widget.AppCompatImageView
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginStart="@dimen/margin_low"
+      android:tint="@color/colorDarkBackground"
+      app:layout_constraintBottom_toBottomOf="@+id/tv_button_text"
+      app:layout_constraintStart_toEndOf="@+id/tv_button_text"
+      app:srcCompat="@drawable/ic_arrow_forward" />
 
-    <androidx.appcompat.widget.AppCompatImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:tint="@color/colorDarkBackground"
-        android:layout_marginStart="@dimen/margin_low"
-        app:layout_constraintBottom_toBottomOf="@+id/tv_button_text"
-        app:layout_constraintStart_toEndOf="@+id/tv_button_text"
-        app:srcCompat="@drawable/ic_arrow_forward" />
+  <com.sample.newsapp.widget.RegularTextView
+      android:id="@+id/tv_button_text"
+      android:layout_width="wrap_content"
+      android:layout_height="wrap_content"
+      android:layout_marginEnd="@dimen/margin_low"
+      android:text="@string/text_continue"
+      android:textColor="@color/colorDarkBackground"
+      android:textSize="@dimen/text_large"
+      app:layout_constraintBottom_toBottomOf="parent"
+      app:layout_constraintEnd_toEndOf="parent"
+      app:layout_constraintStart_toStartOf="parent"
+      app:layout_constraintTop_toTopOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
